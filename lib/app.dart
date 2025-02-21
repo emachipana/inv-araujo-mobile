@@ -8,7 +8,7 @@ class InversionesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Inversiones Araujo",
-      initialRoute: "login",
+      initialRoute: "loader",
       routes: appRoutes,
     );
   }
