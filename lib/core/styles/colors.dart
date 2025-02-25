@@ -34,5 +34,4 @@ class AppColors {
   static Color yellowHover = const Color(0XFFF5A300);
 
   static Color emerald = const Color(0XFF00CC76);
-
 }

@@ -6,10 +6,10 @@ class InversionesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       title: "Inversiones Araujo",
-      initialRoute: "loader",
-      routes: appRoutes,
+      theme: ThemeData(fontFamily: "Nunito"),
     );
   }
 }

@@ -16,8 +16,8 @@ class Button extends StatelessWidget {
     required this.onClick,
     this.icon,
     this.type = ButtonType.primary,
-    this.size = 16,
-    this.textWeight = FontWeight.w500,
+    this.size = 17,
+    this.textWeight = FontWeight.w600,
   });
 
   Map<String, Color> getColor() {
@@ -47,7 +47,7 @@ class Button extends StatelessWidget {
         }),
         foregroundColor: WidgetStateProperty.all(AppColors.white),
         padding: WidgetStateProperty.all(
-          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -59,7 +59,8 @@ class Button extends StatelessWidget {
             icon,
             size: size + 4,
             color: AppColors.white,
-          )
+          ),
+          SizedBox(width: 10,)
         ],
         Text(
           text,
