@@ -11,7 +11,7 @@ class AppColors {
 
   static Color orange = const Color(0XFFEC6032);
 
-  static Color white = const Color(0XFFF5F5F5);
+  static Color white = const Color(0XFFFFFFFF);
 
   static Color blue = const Color(0XFF4173E6);
 
@@ -19,7 +19,7 @@ class AppColors {
 
   static Color taupe = const Color(0XFF8B8B92);
 
-  static Color platinium = const Color(0XFFE0E0E0);
+  static Color platinium = const Color(0xFFD1D1D1);
 
   static Color red = const Color(0XFFFF4747);
 
