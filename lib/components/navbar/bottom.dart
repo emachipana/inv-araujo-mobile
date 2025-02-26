@@ -28,33 +28,33 @@ class BottomNavbar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
       selectedLabelStyle: TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w700,
         color: AppColors.gray,
       ),
       unselectedLabelStyle: TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w700,
         color: AppColors.dim,
       ),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
+          icon: Icon(Icons.home_rounded, size: 20),
           label: "Inicio",
           tooltip: "Ir a inicio",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.article_rounded),
+          icon: Icon(Icons.article_rounded, size: 20),
           label: "Entregas",
           tooltip: "Ir a entregas",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag_rounded),
+          icon: Icon(Icons.shopping_bag_rounded, size: 20),
           label: "Productos",
           tooltip: "Ir a productos",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.more_vert_rounded),
+          icon: Icon(Icons.more_vert_rounded, size: 20),
           label: "Más",
           tooltip: "Ir a más opciones",
         ),
