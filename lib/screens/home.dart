@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inv_araujo_mobile/components/card/color.dart';
+import 'package:inv_araujo_mobile/components/product_card/mini.dart';
 import 'package:inv_araujo_mobile/core/styles/colors.dart';
 import 'package:inv_araujo_mobile/core/styles/shadows.dart';
 import 'package:inv_araujo_mobile/core/styles/texts.dart';
@@ -47,9 +48,7 @@ class HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  Shadows.shadow(90)
-                ],
+                boxShadow: [Shadows.shadow(90)],
               ),
               child: Column(
                 children: [
@@ -120,11 +119,12 @@ class HomeScreenState extends State<HomeScreen> {
                       2: FlexColumnWidth(1),
                     },
                     children: [
-                      tableRow(["Cliente", "Total S/.", "Entrega"], isHeader: true),
+                      tableRow(["Cliente", "Total S/.", "Entrega"],
+                          isHeader: true),
                       tableRow(["Enmanuel Chipana", "345.50", "Hoy"]),
-                      tableRow(["Luis Fernando", "1345.50", "Mañana"]),
-                      tableRow(["Carlos Alcantara", "845.00", "1 Mar. 2025"]),
-                      tableRow(["Carlos Manrique", "745.20", "2 Mar. 2025"]),
+                      tableRow(["Luis Fernando", "1345.50", "Hoy"]),
+                      tableRow(["Carlos Alcantara", "845.00", "Hoy"]),
+                      tableRow(["Carlos Manrique", "745.20", "Hoy"]),
                     ],
                   ),
                 ],
@@ -137,9 +137,7 @@ class HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  Shadows.shadow(90)
-                ],
+                boxShadow: [Shadows.shadow(90)],
               ),
               child: Column(
                 children: [
@@ -151,7 +149,7 @@ class HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Recojo en almacén",
+                            "Traslado a agencia",
                             style: TextStyle(
                               color: AppColors.persian,
                               fontSize: 17.5,
@@ -160,7 +158,7 @@ class HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            "Huancayo - El Tambo",
+                            "Huancayo - Sapallanga",
                             style: TextStyle(
                               color: AppColors.dim,
                               fontSize: 12.5,
@@ -210,11 +208,12 @@ class HomeScreenState extends State<HomeScreen> {
                       2: FlexColumnWidth(1),
                     },
                     children: [
-                      tableRow(["Cliente", "Total S/.", "Entrega"], isHeader: true),
+                      tableRow(["Cliente", "Total S/.", "Traslado"],
+                          isHeader: true),
                       tableRow(["Enmanuel Chipana", "345.50", "Hoy"]),
-                      tableRow(["Luis Fernando", "1345.50", "Mañana"]),
-                      tableRow(["Carlos Alcantara", "845.00", "1 Mar. 2025"]),
-                      tableRow(["Carlos Manrique", "745.20", "2 Mar. 2025"]),
+                      tableRow(["Luis Fernando", "1345.50", "Hoy"]),
+                      tableRow(["Carlos Alcantara", "845.00", "Hoy"]),
+                      tableRow(["Carlos Manrique", "745.20", "Hoy"]),
                     ],
                   ),
                 ],
@@ -227,9 +226,7 @@ class HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  Shadows.shadow(90)
-                ],
+                boxShadow: [Shadows.shadow(90)],
               ),
               child: Column(
                 children: [
@@ -283,6 +280,52 @@ class HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
+                  SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        spacing: 6,
+                        runSpacing: 12,
+                        alignment: WrapAlignment.spaceAround,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          MiniProductCard(
+                            name: "Tijera de podar",
+                            img:
+                                "https://ferreman.pe/wp-content/uploads/2023/09/P110.1.png",
+                            stock: 1,
+                          ),
+                          MiniProductCard(
+                            name: "Caja de guantes",
+                            img:
+                                "https://static.wixstatic.com/media/960395_f3032b79374641bba13e8a70421b9b79~mv2.png/v1/fit/w_500,h_500,q_90/file.png",
+                            stock: 2,
+                          ),
+                          MiniProductCard(
+                            name: "Manguera HDPE",
+                            img:
+                                "https://agrobesser.com/11179-large_default/rollo-manguera-polietileno-32mm-100m-pn8.jpg",
+                            stock: 0,
+                          ),
+                          MiniProductCard(
+                            name: "Tijera de podar",
+                            img:
+                                "https://transparent.imageonline.co/transparent-photo.png",
+                            stock: 3,
+                          ),
+                          MiniProductCard(
+                            name: "Tijera de podar",
+                            img:
+                                "https://transparent.imageonline.co/transparent-photo.png",
+                            stock: 3,
+                          ),
+                          MiniProductCard(
+                            name: "Tijera de podar",
+                            img:
+                                "https://transparent.imageonline.co/transparent-photo.png",
+                            stock: 3,
+                          ),
+                        ],
+                      ))
                 ],
               ),
             ),
@@ -295,7 +338,11 @@ class HomeScreenState extends State<HomeScreen> {
   TableRow tableRow(List<String> cells, {bool isHeader = false}) {
     return TableRow(
       children: cells.map((cell) {
-        Color cellColor = isHeader ? AppColors.gray : ((cell.contains("Hoy") || cell.contains("Mañana")) ? AppColors.orange : AppColors.dim);
+        Color cellColor = isHeader
+            ? AppColors.gray
+            : ((cell.contains("Hoy") || cell.contains("Mañana"))
+                ? AppColors.orange
+                : AppColors.dim);
 
         return TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,

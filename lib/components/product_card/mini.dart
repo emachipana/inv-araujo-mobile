@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inv_araujo_mobile/core/styles/colors.dart';
+import 'package:inv_araujo_mobile/core/styles/shadows.dart';
 
 class MiniProductCard extends StatelessWidget {
   final String name;
@@ -14,11 +16,68 @@ class MiniProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return InkWell(
+      onTap: () => {},
       child: Container(
         height: 100,
+        width: 220,
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 6),
         decoration: BoxDecoration(
-          
+          color: AppColors.smoke,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            Shadows.shadow(30),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.network(img, width: 80),
+            SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.dim,
+                    ),
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Text(
+                        "Stock:",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.gray,
+                        ),
+                      ),
+                      SizedBox(width: 2),
+                      Text(
+                        "$stock",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: stock <= 1 ? AppColors.red : AppColors.dim,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
