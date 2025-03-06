@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inv_araujo_mobile/core/styles/texts.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -10,8 +11,16 @@ class ProductsScreen extends StatefulWidget {
 class ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Productoos"),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Productos", style: TextStyles.title)
+          ],
+        ),
+      ),
     );
   }
 }
