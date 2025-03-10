@@ -9,6 +9,7 @@ class Button extends StatelessWidget {
   final ButtonType type;
   final double size;
   final FontWeight textWeight;
+  final bool isLoading;
 
   const Button({
     super.key,
@@ -18,6 +19,7 @@ class Button extends StatelessWidget {
     this.type = ButtonType.primary,
     this.size = 17,
     this.textWeight = FontWeight.w600,
+    this.isLoading = false
   });
 
   Map<String, Color> getColor() {
@@ -54,14 +56,22 @@ class Button extends StatelessWidget {
         ),
       ),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        if (icon != null) ...[
-          Icon(
-            icon,
-            size: size + 4,
-            color: AppColors.white,
+        if (isLoading) ...[
+          SizedBox(
+            width: size,
+            height: size,
+            child: CircularProgressIndicator(color: AppColors.white, strokeWidth: 3),
           ),
-          SizedBox(width: 10,)
-        ],
+          SizedBox(width: 10),
+        ] else 
+          if (icon != null) ...[
+            Icon(
+              icon,
+              size: size + 4,
+              color: AppColors.white,
+            ),
+            SizedBox(width: 10),
+          ],
         Text(
           text,
           style: TextStyle(

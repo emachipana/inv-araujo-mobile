@@ -49,9 +49,9 @@ class BottomNavbar extends StatelessWidget {
           tooltip: "Ir a entregas",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag_rounded, size: 20),
-          label: "Productos",
-          tooltip: "Ir a productos",
+          icon: Icon(Icons.local_shipping_rounded, size: 20),
+          label: "Traslado",
+          tooltip: "Ir a traslado de pedidos",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.more_vert_rounded, size: 20),
@@ -63,7 +63,7 @@ class BottomNavbar extends StatelessWidget {
         Map<int, String> redirections = {
           0: "/home",
           1: "/deliveries",
-          2: "/products",
+          2: "/transfer",
           3: "/more_options",
         };
 

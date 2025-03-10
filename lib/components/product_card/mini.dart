@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:inv_araujo_mobile/core/styles/colors.dart';
 import 'package:inv_araujo_mobile/core/styles/shadows.dart';
+import 'package:inv_araujo_mobile/core/models/image.dart' as model;
 
 class MiniProductCard extends StatelessWidget {
   final String name;
-  final String img;
+  final model.Image? img;
   final int stock;
 
   const MiniProductCard({
     required this.name,
-    required this.img,
     required this.stock,
+    this.img,
     super.key,
   });
 
@@ -20,7 +21,7 @@ class MiniProductCard extends StatelessWidget {
       onTap: () => {},
       child: Container(
         height: 100,
-        width: 220,
+        width: 200,
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 6),
         decoration: BoxDecoration(
           color: AppColors.smoke,
@@ -34,8 +35,8 @@ class MiniProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(img, width: 80),
-            SizedBox(width: 8),
+            Image.network(img?.url ?? "assets/img/default_product.png", width: 65),
+            SizedBox(width: 1),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
