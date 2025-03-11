@@ -20,6 +20,10 @@ class DataProvider extends ChangeNotifier {
       Pageable(content: [], pageable: {}, totalPages: 0, number: 0);
   Pageable transferBackup =
       Pageable(content: [], pageable: {}, totalPages: 0, number: 0);
+  Pageable products =
+      Pageable(content: [], pageable: {}, totalPages: 0, number: 0);
+  Pageable productsBackup =
+      Pageable(content: [], pageable: {}, totalPages: 0, number: 0);
   List<Product> productsLowStock = [];
   int totalDeliver = 0;
   Map<String, bool> controller = {
@@ -39,7 +43,7 @@ class DataProvider extends ChangeNotifier {
       controller = {...controller, "home": true};
       notifyListeners();
     } on DioException catch (e) {
-      String errorMsg = e.response?.data["message"];
+      String? errorMsg = e.response?.data["message"];
       showToast(context, errorMsg, isError: true);
     } catch (e) {
       print(e);
@@ -62,7 +66,7 @@ class DataProvider extends ChangeNotifier {
       controller = {...controller, "deliveries": true};
       notifyListeners();
     } on DioException catch (e) {
-      String errorMsg = e.response?.data["message"];
+      String? errorMsg = e.response?.data["message"];
       showToast(context, errorMsg, isError: true);
     } catch (e) {
       print(e);
@@ -76,7 +80,7 @@ class DataProvider extends ChangeNotifier {
       deliveries = await _apiService.fetchDeliveries(activeMainCategories);
       notifyListeners();
     } on DioException catch (e) {
-      String errorMsg = e.response?.data["message"];
+      String? errorMsg = e.response?.data["message"];
       showToast(context, errorMsg, isError: true);
     } catch (e) {
       print(e);
@@ -99,7 +103,7 @@ class DataProvider extends ChangeNotifier {
       controller = {...controller, "transfer": true};
       notifyListeners();
     } on DioException catch (e) {
-      String errorMsg = e.response?.data["message"];
+      String? errorMsg = e.response?.data["message"];
       showToast(context, errorMsg, isError: true);
     } catch (e) {
       print(e);
@@ -113,7 +117,42 @@ class DataProvider extends ChangeNotifier {
       transfer = await _apiService.fetchDeliveries(activeMainCategories, type: "transfer");
       notifyListeners();
     } on DioException catch (e) {
-      String errorMsg = e.response?.data["message"];
+      String? errorMsg = e.response?.data["message"];
+      showToast(context, errorMsg, isError: true);
+    } catch (e) {
+      print(e);
+      showToast(context, "Error inesperado", isError: true);
+    }
+  }
+
+  Future<void> loadProducts(BuildContext context, String filter) async {
+    try {
+      if (controller["products"] ?? false) {
+        products = productsBackup;
+        return;
+      }
+
+      Pageable data = await _apiService.fetchProducts(filter);
+      products = data;
+      productsBackup = data;
+
+      controller = {...controller, "products": true};
+      notifyListeners();
+    } on DioException catch (e) {
+      String? errorMsg = e.response?.data["message"];
+      showToast(context, errorMsg, isError: true);
+    } catch (e) {
+      print(e);
+      showToast(context, "Error inesperado", isError: true);
+    }
+  }
+
+  Future<void> loadProductsAtClick(BuildContext context, String filter) async {
+    try {
+      products = await _apiService.fetchProducts(filter);
+      notifyListeners();
+    } on DioException catch (e) {
+      String? errorMsg = e.response?.data["message"];
       showToast(context, errorMsg, isError: true);
     } catch (e) {
       print(e);

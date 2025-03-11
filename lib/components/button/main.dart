@@ -62,7 +62,7 @@ class Button extends StatelessWidget {
             height: size,
             child: CircularProgressIndicator(color: AppColors.white, strokeWidth: 3),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 6),
         ] else 
           if (icon != null) ...[
             Icon(
@@ -70,7 +70,7 @@ class Button extends StatelessWidget {
               size: size + 4,
               color: AppColors.white,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 6),
           ],
         Text(
           text,
