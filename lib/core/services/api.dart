@@ -10,10 +10,10 @@ class ApiService {
   final Dio dio = Dio();
   final AuthStorage _storage = AuthStorage();
 
-  Future<Pageable> fetchDeliveries(Map<String, bool> categories) async {
+  Future<Pageable> fetchDeliveries(Map<String, bool> categories, {String type = "deliver"}) async {
     String url = categories["invitro"] ?? false
-        ? '${apiConstants['invitro']}?sortby=finishDate&direction=DESC&size=16&shipType=RECOJO_ALMACEN'
-        : '${apiConstants['orders']}?sortby=maxShipDate&direction=DESC&size=16&shipType=RECOJO_ALMACEN';
+        ? '${apiConstants['invitro']}?sortby=finishDate&direction=DESC&size=16&shipType=${type == "deliver" ? "RECOJO_ALMACEN" : "ENVIO_AGENCIA"}'
+        : '${apiConstants['orders']}?sortby=maxShipDate&direction=DESC&size=16&shipType=${type == "deliver" ? "RECOJO_ALMACEN" : "ENVIO_AGENCIA"}';
 
     String? token = await _storage.getToken();
     Response res = await dio.get(
