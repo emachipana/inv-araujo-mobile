@@ -69,6 +69,7 @@ flutter:
     - assets/img/logo.png
     - assets/img/logo_min.png
     - assets/img/default_avatar.jpg
+    - assets/img/slider.jpg
     - assets/img/default_product.png
 
   fonts:

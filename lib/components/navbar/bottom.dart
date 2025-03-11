@@ -11,7 +11,7 @@ class BottomNavbar extends StatelessWidget {
     Map<String, int> routes = {
       "/home": 0,
       "/deliveries": 1,
-      "/products": 2,
+      "/transfer": 2,
       "/more_options": 3,
     };
 
