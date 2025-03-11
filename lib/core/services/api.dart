@@ -10,10 +10,28 @@ class ApiService {
   final Dio dio = Dio();
   final AuthStorage _storage = AuthStorage();
 
-  Future<Pageable> fetchDeliveries(Map<String, bool> categories) async {
+  Future<Pageable> fetchProducts(String filter) async {
+    Map<String, String> filters = {
+      "lowStock": "&stockLessThan=3",
+      "orderByPriceDesc": "&sortby=price&direction=DESC",
+    };
+
+    String? token = await _storage.getToken();
+    Response res = await dio.get(
+      "${apiConstants['products']}?size=8${filters[filter] ?? ''}",
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
+
+    if (res.statusCode != 200) throw res.data["message"];
+
+    return Pageable.fromJson(res.data);
+  }
+
+  Future<Pageable> fetchDeliveries(Map<String, bool> categories,
+      {String type = "deliver"}) async {
     String url = categories["invitro"] ?? false
-        ? '${apiConstants['invitro']}?sortby=finishDate&direction=DESC&size=16&shipType=RECOJO_ALMACEN'
-        : '${apiConstants['orders']}?sortby=maxShipDate&direction=DESC&size=16&shipType=RECOJO_ALMACEN';
+        ? '${apiConstants['invitro']}?sortby=finishDate&status=PENDIENTE&direction=DESC&size=16&shipType=${type == "deliver" ? "RECOJO_ALMACEN" : "ENVIO_AGENCIA"}'
+        : '${apiConstants['orders']}?sortby=maxShipDate&status=PENDIENTE&direction=DESC&size=16&shipType=${type == "deliver" ? "RECOJO_ALMACEN" : "ENVIO_AGENCIA"}';
 
     String? token = await _storage.getToken();
     Response res = await dio.get(
@@ -29,7 +47,7 @@ class ApiService {
   Future<List<Order>> fetchOrderDeliveries() async {
     String? token = await _storage.getToken();
     Response res = await dio.get(
-      '${apiConstants['orders']}?sortby=maxShipDate&direction=DESC&size=5&shipType=RECOJO_ALMACEN',
+      '${apiConstants['orders']}?sortby=maxShipDate&status=PENDIENTE&direction=DESC&size=5&shipType=RECOJO_ALMACEN',
       options: Options(headers: {'Authorization': 'Bearer $token'}),
     );
 
@@ -43,7 +61,7 @@ class ApiService {
   Future<List<VitroOrder>> fetchVitroOrderDeliveries() async {
     String? token = await _storage.getToken();
     Response res = await dio.get(
-      '${apiConstants['invitro']}?sortby=finishDate&direction=DESC&size=5&shipType=RECOJO_ALMACEN',
+      '${apiConstants['invitro']}?sortby=finishDate&status=PENDIENTE&direction=DESC&size=5&shipType=RECOJO_ALMACEN',
       options: Options(headers: {'Authorization': 'Bearer $token'}),
     );
 
@@ -77,7 +95,7 @@ class ApiService {
   Future<List<Product>> fetchLowProductsStock() async {
     String? token = await _storage.getToken();
     Response res = await dio.get(
-      '${apiConstants['products']}?stockLessThan=3&size=6',
+      '${apiConstants['products']}?stockLessThan=3&size=4',
       options: Options(headers: {'Authorization': 'Bearer $token'}),
     );
 

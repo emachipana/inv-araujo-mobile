@@ -13,7 +13,7 @@ class Product {
   int categoryId;
   String categoryName;
   bool isActive;
-  List<ProductImage> images;
+  List<ProductImage>? images;
   Discount? discount;
 
   Product({

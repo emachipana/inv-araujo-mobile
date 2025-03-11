@@ -23,6 +23,25 @@ class OptionsScreenState extends State<OptionsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Option(
+              name: "Productos",
+              icon: Icons.shopping_bag_rounded,
+              onClick: () => context.go("/products"),
+            ),
+            SizedBox(height: 10),
+            Option(
+              name: "Buscar producto",
+              icon: Icons.qr_code_scanner_rounded,
+              onClick: () => {},
+            ),
+            SizedBox(height: 10),
+            Option(
+              name: "Ubicación",
+              icon: Icons.location_off_rounded,
+              onClick: () => {},
+              text: "No",
+            ),
+            SizedBox(height: 10),
+            Option(
               name: "Almacenes",
               icon: Icons.store,
               onClick: () => {},

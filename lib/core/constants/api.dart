@@ -5,5 +5,5 @@ Map<String, String> apiConstants = {
   "users": "$baseUri/users",
   "orders": "$baseUri/orders",
   "invitro": "$baseUri/vitroOrders",
-  "products": "$baseUri/products"
+  "products": "$baseUri/products",
 };

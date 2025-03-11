@@ -324,7 +324,7 @@ class HomeScreenState extends State<HomeScreen> {
                               children: data.productsLowStock.map((product) => MiniProductCard(
                                 name: product.name,
                                 stock: product.stock,
-                                img: product.images.first.image,
+                                img: product.images?.first.image,
                               )).toList(),
                             ))
                       ],

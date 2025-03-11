@@ -15,7 +15,7 @@ class BottomNavbar extends StatelessWidget {
       "/more_options": 3,
     };
 
-    return routes[state.fullPath] ?? 0;
+    return routes[state.fullPath] ?? 3;
   }
 
   @override
