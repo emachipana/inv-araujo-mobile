@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:inv_araujo_mobile/components/card/color.dart';
 import 'package:inv_araujo_mobile/components/product_card/mini.dart';
+import 'package:inv_araujo_mobile/core/helpers/main.dart';
 import 'package:inv_araujo_mobile/core/providers/data.dart';
 import 'package:inv_araujo_mobile/core/styles/colors.dart';
 import 'package:inv_araujo_mobile/core/styles/shadows.dart';
@@ -31,20 +31,6 @@ class HomeScreenState extends State<HomeScreen> {
         setState(() => isLoading = false);
       });
     }
-  }
-
-  String parseDate(DateTime? date) {
-    if (date == null) return "Sin asignar";
-
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final tomorrow = today.add(Duration(days: 1));
-
-    if (date.isAtSameMomentAs(today)) return "Hoy";
-
-    if (date.isAtSameMomentAs(tomorrow)) return "Mañana";
-
-    return DateFormat("d MMM. yyyy", "es").format(date);
   }
 
   @override
@@ -117,7 +103,7 @@ class HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             InkWell(
-                              onTap: () => {},
+                              onTap: () => context.go("/deliveries"),
                               child: Row(
                                 children: [
                                   Text(
@@ -163,7 +149,7 @@ class HomeScreenState extends State<HomeScreen> {
                               (order) => tableRow([
                                 order.client.rsocial,
                                 "${order.total}",
-                                parseDate(order.maxShipDate),
+                                Helpers.parseDate(order.maxShipDate),
                               ], onClick: () {
                                 context.go("/deliveries/order/${order.id}");
                               }),
@@ -211,7 +197,7 @@ class HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             InkWell(
-                              onTap: () => {},
+                              onTap: () => context.go("/deliveries"),
                               child: Row(
                                 children: [
                                   Text(
@@ -257,7 +243,7 @@ class HomeScreenState extends State<HomeScreen> {
                               (order) => tableRow([
                                 order.client.rsocial,
                                 "${order.total}",
-                                parseDate(order.finishDate),
+                                Helpers.parseDate(order.finishDate),
                               ], onClick: () {
                                 context.go("/deliveries/invitro/${order.id}");
                               }),
@@ -305,7 +291,7 @@ class HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             InkWell(
-                              onTap: () => {},
+                              onTap: () => context.go("/products"),
                               child: Row(
                                 children: [
                                   Text(
