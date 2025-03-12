@@ -5,10 +5,23 @@ import 'package:inv_araujo_mobile/core/models/order.dart';
 import 'package:inv_araujo_mobile/core/models/pageable.dart';
 import 'package:inv_araujo_mobile/core/models/product.dart';
 import 'package:inv_araujo_mobile/core/models/vitro_order.dart';
+import 'package:inv_araujo_mobile/core/models/warehouse.dart';
 
 class ApiService {
   final Dio dio = Dio();
   final AuthStorage _storage = AuthStorage();
+
+  Future<List<Warehouse>> fetchWarehouses() async {
+    String? token = await _storage.getToken();
+    Response res = await dio.get(
+      apiConstants["warehouses"] ?? "",
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
+
+    if (res.statusCode != 200) throw res.data["message"];
+
+    return (res.data as List).map((data) => Warehouse.fromJson(data)).toList();
+  }
 
   Future<Pageable> fetchProducts(String filter) async {
     Map<String, String> filters = {

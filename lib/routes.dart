@@ -10,6 +10,7 @@ import 'package:inv_araujo_mobile/screens/options.dart';
 import 'package:inv_araujo_mobile/screens/products.dart';
 import 'package:inv_araujo_mobile/screens/recovery_password.dart';
 import 'package:inv_araujo_mobile/screens/transfer.dart';
+import 'package:inv_araujo_mobile/screens/warehouses.dart';
 import 'package:provider/provider.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -42,5 +43,6 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: "/products", builder: (_, __) => MainLayout(child: ProductsScreen())),
     GoRoute(path: "/more_options", builder: (_, __) => MainLayout(child: OptionsScreen())),
     GoRoute(path: "/transfer", builder: (_, __) => MainLayout(child: TransferScreen())),
+    GoRoute(path: "/warehouses", builder: (_, __) => MainLayout(child: WarehousesScreen())),
   ],
 );

@@ -6,4 +6,5 @@ Map<String, String> apiConstants = {
   "orders": "$baseUri/orders",
   "invitro": "$baseUri/vitroOrders",
   "products": "$baseUri/products",
+  "warehouses": "$baseUri/warehouses",
 };

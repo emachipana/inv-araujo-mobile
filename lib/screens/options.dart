@@ -44,7 +44,7 @@ class OptionsScreenState extends State<OptionsScreen> {
             Option(
               name: "Almacenes",
               icon: Icons.store,
-              onClick: () => {},
+              onClick: () => context.go("/warehouses"),
             ),
             SizedBox(height: 10),
             Option(
@@ -54,10 +54,16 @@ class OptionsScreenState extends State<OptionsScreen> {
             ),
             SizedBox(height: 10),
             Option(
+              name: "Cambiar contraseña",
+              icon: Icons.lock_person_rounded,
+              onClick: () => {},
+            ),
+            SizedBox(height: 10),
+            Option(
               name: "Cerrar sesión",
               icon: Icons.logout_rounded,
-              onClick: () async {
-                await auth.logout();
+              onClick: () {
+                auth.logout();
                 context.go("/login");
               },
             )
