@@ -59,9 +59,10 @@ class HomeScreenState extends State<HomeScreen> {
                       SizedBox(width: 30),
                       CardColor(
                         backgroundColor: AppColors.persian,
-                        title: "Almacén actual",
-                        subtitle: "Sapallanga",
-                        icon: Icons.location_on_rounded,
+                        title: data.currentWarehouse == null ? "Activa la ubicación" : "Almacén actual",
+                        subtitle: data.currentWarehouse == null ? "" : data.currentWarehouse?.name ?? "",
+                        icon: data.currentWarehouse == null ? Icons.location_off_rounded : Icons.location_on_rounded,
+                        onClick: () => context.go("/warehouses"),
                       ),
                     ],
                   ),

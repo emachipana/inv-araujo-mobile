@@ -5,10 +5,13 @@ import 'package:inv_araujo_mobile/core/models/order.dart';
 import 'package:inv_araujo_mobile/core/models/pageable.dart';
 import 'package:inv_araujo_mobile/core/models/product.dart';
 import 'package:inv_araujo_mobile/core/models/vitro_order.dart';
+import 'package:inv_araujo_mobile/core/models/warehouse.dart';
 import 'package:inv_araujo_mobile/core/services/api.dart';
 
 class DataProvider extends ChangeNotifier {
   final ApiService _apiService = ApiService();
+
+  Warehouse? currentWarehouse;
 
   List<Order> orderDeliveries = [];
   List<VitroOrder> vitroOrderDeliveries = [];
@@ -26,12 +29,38 @@ class DataProvider extends ChangeNotifier {
       Pageable(content: [], pageable: {}, totalPages: 0, number: 0);
   List<Product> productsLowStock = [];
   int totalDeliver = 0;
+  List<Warehouse> warehouses = [];
+  List<Warehouse> warehousesBackup = [];
+
   Map<String, bool> controller = {
     "home": false,
     "products": false,
     "deliveries": false,
     "transfer": false,
+    "warehouses": false,
   };
+
+  Future<void> loadWarehouses(BuildContext context) async {
+    try {
+      if (controller["warehouses"] ?? false) {
+        warehouses = warehousesBackup;
+        return;
+      }
+
+      List<Warehouse> data = await _apiService.fetchWarehouses();
+      warehouses = data;
+      warehousesBackup = data;
+
+      controller = {...controller, "warehouses": true};
+      notifyListeners();
+    } on DioException catch (e) {
+      String? errorMsg = e.response?.data["message"];
+      showToast(context, errorMsg, isError: true);
+    } catch (e) {
+      print(e);
+      showToast(context, "Error inesperado", isError: true);
+    }
+  }
 
   Future<void> loadOnHome(BuildContext context) async {
     try {
@@ -96,7 +125,8 @@ class DataProvider extends ChangeNotifier {
         return;
       }
 
-      Pageable data = await _apiService.fetchDeliveries(activeMainCategories, type: "transfer");
+      Pageable data = await _apiService.fetchDeliveries(activeMainCategories,
+          type: "transfer");
       transfer = data;
       transferBackup = data;
 
@@ -114,7 +144,8 @@ class DataProvider extends ChangeNotifier {
   Future<void> loadTransferAtClick(
       BuildContext context, Map<String, bool> activeMainCategories) async {
     try {
-      transfer = await _apiService.fetchDeliveries(activeMainCategories, type: "transfer");
+      transfer = await _apiService.fetchDeliveries(activeMainCategories,
+          type: "transfer");
       notifyListeners();
     } on DioException catch (e) {
       String? errorMsg = e.response?.data["message"];

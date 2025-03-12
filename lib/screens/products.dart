@@ -59,7 +59,7 @@ class ProductsScreenState extends State<ProductsScreen> {
               width: double.infinity,
               child: Wrap(
                 spacing: 10,
-                runSpacing: 20,
+                runSpacing: 10,
                 alignment: WrapAlignment.start,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
